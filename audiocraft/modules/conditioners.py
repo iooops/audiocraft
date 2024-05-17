@@ -412,8 +412,8 @@ class T5Conditioner(TextConditioner):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             try:
-                self.t5_tokenizer = T5Tokenizer.from_pretrained(name)
-                t5 = T5EncoderModel.from_pretrained(name).train(mode=finetune)
+                self.t5_tokenizer = T5Tokenizer.from_pretrained(os.path.join(os.environ['AUDIOCRAFT_MODELS'], name))
+                t5 = T5EncoderModel.from_pretrained(os.path.join(os.environ['AUDIOCRAFT_MODELS'], name)).train(mode=finetune)
             finally:
                 logging.disable(previous_level)
         if finetune:
